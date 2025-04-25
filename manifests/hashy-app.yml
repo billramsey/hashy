@@ -1,0 +1,49 @@
+# Taken from
+#https://github.com/aws-samples/python-fastapi-demo-docker/blob/main/kubernetes/fastapi-app.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hashy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hashy-service
+  namespace: hashy
+spec:
+  selector:
+    app: hashy-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hashy-deployment
+  namespace: hashy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hashy-app
+  template:
+    metadata:
+      labels:
+        app: hashy-app
+    spec:
+      containers:
+        - name: web
+          image: 072853783183.dkr.ecr.us-east-1.amazonaws.com/hashy:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+            limits:
+              cpu: "500m"
+              memory: "500Mi"
+          imagePullPolicy: Always
