@@ -18,12 +18,12 @@ bob%
 
 Uses redis as a back end for storing hashes.
 
-
 ### Deploy Process
 
-make sure to have AWS CLI, terraform, docker, and kubectl installed.
+Make sure to have AWS CLI, terraform, docker, and kubectl installed.
+Make sure you've authenticated to aws and set AWS_PROFILE correctly.
 
-Update terraform/modules/eks/main.tf/cluster_endpoint_public_access = to true 
+Update terraform/modules/eks/main.tf/cluster_endpoint_public_access = true 
 to allow connections.
 
 `make apply # runs terraform.`
@@ -68,11 +68,15 @@ Out of scope for time:
 4. move Terraform state to s3.
 5. Further lock down permissions for individual services.
 6. SSL/Domain Name/cloudfront URL.
+7. Create Terraform user with proper permissions.
 
-## Some Resources I referenced
+## Some Resources I Referenced
 
 https://github.com/aws-samples/python-fastapi-demo-docker/blob/main/kubernetes/fastapi-app.yaml
+
 https://github.com/aws-ia/terraform-aws-eks-blueprints/blob/main/patterns/private-public-ingress/main.tf
+
 https://fastapi.tiangolo.com/deployment/docker/#create-the-fastapi-code
+
 https://github.com/Sirlawdin/fastapi-iac-monitoring
 

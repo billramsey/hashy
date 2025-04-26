@@ -22,8 +22,8 @@ locals {
 }
 
 module "app" {
-  source = "./modules/app"
-  name   = local.name
+  source              = "./modules/app"
+  name                = local.name
   vpc_id              = module.app-vpc.vpc_id
   vpc_cider_block     = local.vpc_cidr
   vpc_private_subnets = module.app-vpc.private_subnets
