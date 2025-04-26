@@ -24,5 +24,5 @@ module "elasticache" {
   }
   # Subnet Group
   subnet_ids = var.vpc_private_subnets
-  tags = var.tags
+  tags       = var.tags
 }
